@@ -31,7 +31,7 @@ const server = http.createServer(app);
 dbServer(app);*/
 
 //require('./test-mongodb/app')(app);
-require('./assignment/app')(app);
+// require('./assignment/app')(app);
 
 // For Build: Catch all other routes and return the index file -- BUILDING
 app.get('*', function (req, res) {
