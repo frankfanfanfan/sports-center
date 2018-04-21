@@ -1,0 +1,15 @@
+<p>
+  user-new works!
+</p>
+
+<div [ngSwitch]="role">
+
+  <div *ngSwitchCase="'fan'">
+    <app-fan-new></app-fan-new>
+  </div>
+
+  <div *ngSwitchCase="'player'">
+    <app-player-new></app-player-new>
+  </div>
+
+</div>
