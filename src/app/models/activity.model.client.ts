@@ -1,5 +1,4 @@
 import {User} from './user.model.client';
-import Any = jasmine.Any;
 
 export class Activity {
   _id: String;
