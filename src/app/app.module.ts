@@ -24,6 +24,8 @@ import { UserNewComponent } from './views/user/register/user-new/user-new.compon
 import { ProfileComponent } from './views/user/profile/profile.component';
 import {UserService} from './services/user.service.client';
 import {ActivityService} from './services/activity.service.client';
+import { UserEditComponent } from './views/user/user-edit/user-edit.component';
+import { ActivityDetailComponent } from './views/activity/activity-detail/activity-detail.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import {ActivityService} from './services/activity.service.client';
     LoginComponent,
     RegisterComponent,
     UserNewComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserEditComponent,
+    ActivityDetailComponent
   ],
   imports: [
     BrowserModule,

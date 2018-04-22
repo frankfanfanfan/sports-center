@@ -6,6 +6,8 @@ import {ProfileComponent} from './views/user/profile/profile.component';
 import {ActivityDashboardComponent} from './views/activity/activity-dashboard/activity-dashboard.component';
 import {ActivityNewComponent} from './views/activity/activity-new/activity-new.component';
 import {ActivityEditComponent} from './views/activity/activity-edit/activity-edit.component';
+import {UserEditComponent} from './views/user/user-edit/user-edit.component';
+import {ActivityDetailComponent} from './views/activity/activity-detail/activity-detail.component';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
@@ -13,10 +15,12 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'register/:role', component: UserNewComponent},
   {path: 'user/:uid', component: ProfileComponent},
+  {path: 'user/:uid/edit', component: UserEditComponent},
 
   {path: 'user/:uid/activity', component: ActivityDashboardComponent},
   {path: 'user/:uid/activity/new', component: ActivityNewComponent},
-  {path: 'user/:uid/activity/:actid', component: ActivityEditComponent}
+  {path: 'user/:uid/activity/:actid', component: ActivityDetailComponent},
+  {path: 'user/:uid/activity/:actid/edit', component: ActivityEditComponent}
 ];
 
 export const Routing = RouterModule.forRoot(appRoutes);

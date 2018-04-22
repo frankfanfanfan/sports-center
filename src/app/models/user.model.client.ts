@@ -10,8 +10,8 @@ export class User {
   firstName: String;
   lastName: String;
   description: String;
-  activities: [Activity];
-  likes: [Activity];
+  activities: Activity[];
+  likes: Activity[];
 
   constructor(_id, username, password, role, email, phone, firstName, lastName, description) {
     this._id = _id;

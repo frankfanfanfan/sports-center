@@ -1,4 +1,5 @@
 import {User} from './user.model.client';
+import Any = jasmine.Any;
 
 export class Activity {
   _id: String;
@@ -7,7 +8,7 @@ export class Activity {
   location: String;
   description: String;
   capacity: Number;
-  players: [User];
+  players: User[];
 
   constructor(_id, name, schedule, location, description, capacity) {
     this._id = _id;

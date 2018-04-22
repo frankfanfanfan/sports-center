@@ -1,3 +1,17 @@
-<p>
-  player-dashboard works!
-</p>
+<a routerLink="edit">Edit Profile</a>
+
+<h3>My Games</h3>
+<div class="container">
+  <ul class="list-group cl-list-group-borderless">
+    <li *ngFor = "let activity of user.activities" class="list-group-item cl-list-item-borderless">
+      <a routerLink="activity/{{activity._id}}">{{activity.name}}</a>
+      <a class="pull-right">
+        <span class="glyphicon glyphicon-remove" (click)="removeActivity(user._id, activity._id)"></span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<a routerLink="activity">See All the Activities</a>
+
+

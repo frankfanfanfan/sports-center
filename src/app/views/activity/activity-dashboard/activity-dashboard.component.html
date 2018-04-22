@@ -2,6 +2,10 @@
   <ul class="list-group cl-list-group-borderless">
     <li *ngFor = "let activity of activities" class="list-group-item cl-list-item-borderless">
       <a routerLink="{{activity._id}}">{{activity.name}}</a>
+      <a class="pull-right">
+        {{activity.capacity}}
+      </a>
     </li>
   </ul>
 </div>
+

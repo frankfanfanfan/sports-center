@@ -1,0 +1,15 @@
+<div [ngSwitch]="user.role">
+
+  <div *ngSwitchCase="'owner'">
+    <app-owner-edit></app-owner-edit>
+  </div>
+
+  <div *ngSwitchCase="'fan'">
+    <app-fan-edit></app-fan-edit>
+  </div>
+
+  <div *ngSwitchCase="'player'">
+    <app-player-edit></app-player-edit>
+  </div>
+</div>
+

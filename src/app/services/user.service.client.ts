@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user.model.client';
+import {Activity} from '../models/activity.model.client';
 
 
 @Injectable()
@@ -69,6 +70,27 @@ export class UserService {
       if (this.users[i]._id === userId) {
         const j = +i;
         this.users.splice(j, 1);
+      }
+    }
+  }
+
+  enrollActivity(activity: Activity, userId: String) {
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i]._id === userId && !this.users[i].activities.includes(activity)) {
+        this.users[i].activities.push(activity);
+      }
+    }
+  }
+
+  quitActivity(actId: String, userId: String) {
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i]._id === userId) {
+        for (let j = 0; j < this.users[i].activities.length; j++) {
+          if (this.users[i].activities[j]._id === actId) {
+            const k = +j;
+            this.users[i].activities.splice(k, 1);
+          }
+        }
       }
     }
   }

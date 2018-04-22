@@ -1,3 +1,16 @@
 <p>
   fan-dashboard works!
 </p>
+
+<a routerLink="edit">Edit Profile</a>
+
+<div class="container">
+  <ul class="list-group cl-list-group-borderless">
+    <li *ngFor = "let activity of user.likes" class="list-group-item cl-list-item-borderless">
+      <a routerLink="{{activity._id}}">{{activity.name}}</a>
+    </li>
+  </ul>
+</div>
+
+<a routerLink="activity">See All the Activities</a>
+
