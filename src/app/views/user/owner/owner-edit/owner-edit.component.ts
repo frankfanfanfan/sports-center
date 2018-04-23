@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from '../../../../models/user.model.client';
+import {ActivatedRoute} from '@angular/router';
+import {UserService} from '../../../../services/user.service.client';
 
 @Component({
   selector: 'app-owner-edit',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OwnerEditComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+  constructor(
+    private userService: UserService,
+    private activateRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.activateRoute.params.subscribe((params: any) => {
+      this.user = this.userService.findUserById(params['uid']);
+    });
+  }
+
+  updateUser(user) {
+    this.user = this.userService.updateUser(user);
   }
 
 }

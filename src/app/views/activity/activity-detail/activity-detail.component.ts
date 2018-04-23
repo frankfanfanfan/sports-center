@@ -14,6 +14,8 @@ export class ActivityDetailComponent implements OnInit {
 
   user: User;
   activity: Activity;
+  isPlayer: boolean;
+  isOwner: boolean;
   constructor(
     private activityService: ActivityService,
     private userService: UserService,
@@ -24,8 +26,11 @@ export class ActivityDetailComponent implements OnInit {
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
       this.user = this.userService.findUserById(params['uid']);
+      this.isPlayer = this.user.role === 'player';
+      this.isOwner = this.user.role === 'owner';
       this.activity = this.activityService.findActivityById(params['actid']);
       this.user.activities = this.user.activities == null ? [] : this.user.activities;
+      this.user.likes = this.user.likes == null ? [] : this.user.likes;
       this.activity.players = this.activity.players == null ? [] : this.activity.players;
     });
   }
@@ -41,4 +46,12 @@ export class ActivityDetailComponent implements OnInit {
     }
   }
 
+  like() {
+    if (this.user.role === 'fan') {
+      this.userService.likeActivity(this.activity, this.user._id);
+      this.router.navigate(['../..'], {relativeTo: this.activateRoute});
+    } else {
+      console.log('You are the owner, you decide');
+    }
+  }
 }

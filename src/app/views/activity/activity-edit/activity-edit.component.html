@@ -1,1 +1,33 @@
-{{activity.description}}
+<div class="container">
+
+  <nav class="navbar navbar-fixed-top cl-blue-navbar">
+    <a class="cl-text-white navbar-brand cl-text-bold" href="#">
+      Profile
+    </a>
+  </nav>
+
+  <div class="form-group">
+    <label>Name</label>
+    <input [(ngModel)]="activity.name" type="text" class="form-control" placeholder={{activity.name}}>
+  </div>
+  <div class="form-group">
+    <label>Schedule</label>
+    <input [(ngModel)]="activity.schedule" type="text" class="form-control" placeholder={{activity.schedule}}>
+  </div>
+  <div class="form-group">
+    <label>Location</label>
+    <input [(ngModel)]="activity.location" type="text" class="form-control" placeholder={{activity.location}}>
+  </div>
+  <div class="form-group">
+    <label>Capacity</label>
+    <input [(ngModel)]="activity.capacity" type="text" class="form-control" placeholder={{activity.capacity}}>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <input [(ngModel)]="activity.description" type="text" class="form-control" placeholder={{activity.description}}>
+  </div>
+
+  <button class="btn btn-success btn-block" (click)="updateActivity(activity)">Update</button>
+  <button class="btn btn-danger btn-block" (click)="deleteActivity(activity._id)">Delete</button>
+  <a class="btn btn-primary btn-block" [routerLink]="['../..']">Activity List</a>
+</div>

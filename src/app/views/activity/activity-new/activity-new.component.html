@@ -1,3 +1,23 @@
-<p>
-  activity-new works!
-</p>
+<div class="container">
+  <input [(ngModel)]="name" type="text"
+         class="form-control"
+         placeholder="name"/>
+  <input [(ngModel)]="schedule" type="text"
+         class="form-control"
+         placeholder="schedule"/>
+  <input [(ngModel)]="location" type="text"
+         class="form-control"
+         placeholder="location"/>
+  <input [(ngModel)]="description" type="text"
+         class="form-control"
+         placeholder="description"/>
+  <input [(ngModel)]="capacity" type="number"
+         class="form-control"
+         placeholder="capacity"/>
+
+  <button routerLink="../.." class="btn btn-primary btn-block"
+          (click)="createActivity(name, schedule, location, description, capacity)">Create</button>
+  <a class="btn btn-danger  btn-block"
+     routerLink="../..">Cancel</a>
+
+</div>

@@ -1,10 +1,33 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left">
+      <a routerLink=".." class="cl-text-black cl-icon-padding">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a routerLink=".." class="cl-icon-padding cl-text-black">
+          <span class="glyphicon glyphicon-ok">
+          </span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold">
+      Activity List
+    </a>
+  </div>
+</nav>
+
 <div class="container">
   <ul class="list-group cl-list-group-borderless">
     <li *ngFor = "let activity of activities" class="list-group-item cl-list-item-borderless">
       <a routerLink="{{activity._id}}">{{activity.name}}</a>
-      <a class="pull-right">
-        {{activity.capacity}}
-      </a>
+      <div class="pull-right">
+        <div *ngIf="activity.players === undefined; then nobody else somebody"></div>
+        <ng-template #nobody>0/{{activity.capacity}}</ng-template>
+        <ng-template #somebody>{{activity.players.length}}/{{activity.capacity}}</ng-template>
+      </div>
     </li>
   </ul>
 </div>

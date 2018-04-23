@@ -10,7 +10,6 @@ import { FanDashboardComponent } from './views/user/fan/fan-dashboard/fan-dashbo
 import { FanNewComponent } from './views/user/fan/fan-new/fan-new.component';
 import { FanEditComponent } from './views/user/fan/fan-edit/fan-edit.component';
 import { OwnerDashboardComponent } from './views/user/owner/owner-dashboard/owner-dashboard.component';
-import { OwnerNewComponent } from './views/user/owner/owner-new/owner-new.component';
 import { OwnerEditComponent } from './views/user/owner/owner-edit/owner-edit.component';
 import { PlayerDashboardComponent } from './views/user/player/player-dashboard/player-dashboard.component';
 import { PlayerNewComponent } from './views/user/player/player-new/player-new.component';
@@ -38,7 +37,6 @@ import { ActivityDetailComponent } from './views/activity/activity-detail/activi
     FanNewComponent,
     FanEditComponent,
     OwnerDashboardComponent,
-    OwnerNewComponent,
     OwnerEditComponent,
     PlayerDashboardComponent,
     PlayerNewComponent,

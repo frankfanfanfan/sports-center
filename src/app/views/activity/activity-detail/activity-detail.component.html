@@ -1,6 +1,36 @@
-<div>{{activity.name}}</div>
-<div>{{activity.schedule}}</div>
-<div>{{activity.location}}</div>
-<div>{{activity.description}}</div>
-<div>{{activity.players}}</div>
-<button class="btn btn-success btn-block" (click)="enroll()">Enroll this activity</button>
+<div class="container">
+  <div class="form-group">
+    <label>Name</label>
+    <a class="form-control">{{activity.name}}</a>
+  </div>
+  <div class="form-group">
+    <label>Schedule</label>
+    <a class="form-control">{{activity.schedule}}</a>
+  </div>
+  <div class="form-group">
+    <label>Location</label>
+    <a class="form-control">{{activity.location}}</a>
+  </div>
+  <div class="form-group">
+    <label>Capacity</label>
+    <a class="form-control">{{activity.capacity}}</a>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <a class="form-control">{{activity.description}}</a>
+  </div>
+
+  <div *ngIf="isPlayer; then showEnroll else showLike"></div>
+  <ng-template #showEnroll>
+    <button class="btn btn-success btn-block" (click)="enroll()">Enroll this activity</button>
+  </ng-template>
+  <ng-template #showLike>
+    <button class="btn btn-warning btn-block" (click)="like()">Like this activity</button>
+  </ng-template>
+
+  <div *ngIf="isOwner; then showEdit"></div>
+  <ng-template #showEdit>
+    <a class="btn btn-success btn-block" routerLink="edit">Edit Activity</a>
+  </ng-template>
+</div>
+

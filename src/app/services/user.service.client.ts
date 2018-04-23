@@ -94,4 +94,25 @@ export class UserService {
       }
     }
   }
+
+  likeActivity(activity: Activity, userId: String) {
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i]._id === userId && !this.users[i].likes.includes(activity)) {
+        this.users[i].likes.push(activity);
+      }
+    }
+  }
+
+  dislikeActivity(actId: String, userId: String) {
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i]._id === userId) {
+        for (let j = 0; j < this.users[i].likes.length; j++) {
+          if (this.users[i].likes[j]._id === actId) {
+            const k = +j;
+            this.users[i].likes.splice(k, 1);
+          }
+        }
+      }
+    }
+  }
 }

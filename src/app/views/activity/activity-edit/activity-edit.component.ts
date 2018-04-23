@@ -28,4 +28,13 @@ export class ActivityEditComponent implements OnInit {
     });
   }
 
+  updateActivity(activity) {
+    this.activityService.updateActivity(activity);
+  }
+
+  deleteActivity(actId) {
+    this.activityService.deleteActivity(actId);
+    this.router.navigate(['../../..'], {relativeTo: this.activateRoute});
+  }
+
 }

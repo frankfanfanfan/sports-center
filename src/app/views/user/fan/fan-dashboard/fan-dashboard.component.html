@@ -1,13 +1,24 @@
-<p>
-  fan-dashboard works!
-</p>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
 
-<a routerLink="edit">Edit Profile</a>
+    <div class="navbar-text pull-left"></div>
+    <div class="navbar-text pull-right">
+      <a routerLink="edit" class="btn btn-success">Edit Profile</a>
+      <a routerLink="/login" class="btn btn-danger">Logout</a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold">
+      My Profile
+    </a>
+  </div>
+</nav>
 
 <div class="container">
   <ul class="list-group cl-list-group-borderless">
     <li *ngFor = "let activity of user.likes" class="list-group-item cl-list-item-borderless">
-      <a routerLink="{{activity._id}}">{{activity.name}}</a>
+      <a routerLink="activity/{{activity._id}}">{{activity.name}}</a>
+      <a class="pull-right">
+        <span class="glyphicon glyphicon-remove" style="cursor: pointer" (click)="dislikeActivity(user._id, activity._id)"></span>
+      </a>
     </li>
   </ul>
 </div>

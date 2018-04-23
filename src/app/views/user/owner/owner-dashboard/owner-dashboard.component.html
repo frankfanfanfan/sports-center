@@ -1,3 +1,71 @@
-<p>
-  owner-dashboard works!
-</p>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left"></div>
+    <div class="navbar-text pull-right">
+      <a routerLink="edit" class="btn btn-success">Edit Profile</a>
+      <a routerLink="/login" class="btn btn-danger">Logout</a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold">
+      My Profile
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="pull-left">
+    <h3>All the Activities</h3>
+    <a routerLink="activity/new" class="btn btn-primary">Create New Activity</a>
+    <table class="table table-hover table-striped">
+      <tr>
+        <th>Activity Name</th>
+        <th>Schedule</th>
+        <th>Location</th>
+        <th>description</th>
+        <th>participants</th>
+      </tr>
+
+      <tr *ngFor="let activity of activities">
+        <td>
+          <a routerLink="activity/{{activity._id}}/edit">{{activity.name}}</a>
+        </td>
+        <td>{{activity.schedule}}</td>
+        <td>{{activity.location}}</td>
+        <td>{{activity.description}}</td>
+        <td>
+          <div *ngIf="activity.players === undefined; then nobody else somebody"></div>
+          <ng-template #nobody>0/{{activity.capacity}}</ng-template>
+          <ng-template #somebody>{{activity.players.length}}/{{activity.capacity}}</ng-template>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="pull-right">
+    <h3>All the Users</h3>
+    <table class="table table-hover table-striped">
+      <tr>
+        <th>Username</th>
+        <th>Role</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let people of users">
+        <td>{{people.username}}</td>
+        <td>{{people.role}}</td>
+        <td>{{people.firstName}}</td>
+        <td>{{people.lastName}}</td>
+        <td>{{people.phone}}</td>
+        <td>{{people.email}}</td>
+        <td>
+          <a>
+            <span class="glyphicon glyphicon-remove" style="cursor: pointer" (click)="deleteUser(people)"></span>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
