@@ -47,6 +47,7 @@ export class ActivityDetailComponent implements OnInit {
     if (this.user.role === 'player') {
       this.userService.enrollActivity(this.activity, this.user._id).subscribe();
       this.activityService.registerPlayer(this.activity._id, this.user).subscribe();
+      this.ngOnInit();
       this.router.navigate(['../..'], {relativeTo: this.activateRoute});
     } else {
       alert('Only players can enroll this activity');
@@ -56,6 +57,7 @@ export class ActivityDetailComponent implements OnInit {
   like() {
     if (this.user.role === 'fan') {
       this.userService.likeActivity(this.activity, this.user._id).subscribe();
+      this.ngOnInit();
       this.router.navigate(['../..'], {relativeTo: this.activateRoute});
     } else {
       console.log('You are the owner, you decide');

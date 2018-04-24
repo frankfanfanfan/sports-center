@@ -37,6 +37,7 @@ export class ActivityService {
   }
 
   updateActivity(activity: Activity) {
+    console.log(activity);
     const url =  this.baseUrl + '/api/activity/' + activity._id;
     return this.http.put(url, activity).map((response: Response) => {
       return response.json();

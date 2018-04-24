@@ -38,8 +38,9 @@ export class ActivityEditComponent implements OnInit {
 
   updateActivity(newActivity) {
     this.activityService.updateActivity(newActivity).subscribe(
-      (activity: Activity) => {
+      (activity: any) => {
         this.activity = activity;
+        this.router.navigate(['../../..'], {relativeTo: this.activateRoute});
       }
     );
   }

@@ -10,8 +10,14 @@ var userSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
   description: String,
-  activities: [activitySchema],
-  likes: [activitySchema],
+  activities: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'activityModel'
+  }],
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'activityModel'
+  }],
   dateCreate: {
     type: Date,
     default: Date.now()

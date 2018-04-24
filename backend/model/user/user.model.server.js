@@ -21,7 +21,7 @@ function createUser(user){
 }
 
 function findUserById(userId) {
-  return userModel.findById(userId);
+  return userModel.findById(userId).populate('activities').populate('likes').exec();
 }
 
 function findAllUsers(){
@@ -47,10 +47,14 @@ function deleteUser(userId) {
 function enrollActivity(userId, activityId) {
   return userModel.findUserById(userId)
     .then(function(user) {
-      if (!user.activities.includes(activityId)) {
-        user.activities.push(activityId);
-        return user.save();
+      for (var i = 0; i < user.activities.length; i++) {
+        if (String(user.activities[i]._id) === String(activityId)) {
+          console.log('found');
+          return;
+        }
       }
+      user.activities.push(activityId);
+      return user.save();
     })
 }
 
@@ -65,10 +69,14 @@ function quitActivity(userId, activityId) {
 function likeActivity(userId, activityId) {
   return userModel.findUserById(userId)
     .then(function(user) {
-      if (!user.likes.includes(activityId)) {
-        user.likes.push(activityId);
-        return user.save();
+      for (var i = 0; i < user.likes.length; i++) {
+        if (String(user.likes[i]._id) === String(activityId)) {
+          console.log('found');
+          return;
+        }
       }
+      user.likes.push(activityId);
+      return user.save();
     })
 }
 

@@ -36,10 +36,22 @@ function deleteActivity(actId) {
 function registerPlayer(userId, actId) {
   return activityModel.findById(actId)
     .then(function(activity) {
-      if (!activity.players.includes(userId)) {
-        activity.players.push(userId);
-        return activity.save();
+      for (var i = 0; i < activity.players.length; i++) {
+        if (String(activity.players[i]) === String(userId)) {
+          return;
+        }
       }
+      activity.players.push(userId);
+      return activity.save();
+      // activity.players.findById(userId)
+      //   .then(function(user) {
+      //     if (!user) {
+      //       activity.players.push(userId);
+      //       return activity.save();
+      //     } else {
+      //       console.log('exist');
+      //     }
+      //   });
     })
 }
 
@@ -48,8 +60,6 @@ function removePlayer(userId, actId) {
     .then(function(activity) {
       activity.players.pull(userId);
       return activity.save();
-    }).then(function(activity) {
-      return activity.players.save();
     });
 }
 

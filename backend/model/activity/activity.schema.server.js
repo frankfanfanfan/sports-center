@@ -7,7 +7,10 @@ var activitySchema = mongoose.Schema({
   location: String,
   description: String,
   capacity: Number,
-  players: [userSchema],
+  players: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'userModel'
+  }],
   dateCreated: {
     type : Date,
     default: Date.now()

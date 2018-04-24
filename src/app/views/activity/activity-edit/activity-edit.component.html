@@ -7,24 +7,24 @@
   </nav>
 
   <div class="form-group">
-    <label>Name</label>
-    <input [(ngModel)]="activity.name" type="text" class="form-control" placeholder={{activity.name}}>
+    <label for="activity-name">Name</label>
+    <input [(ngModel)]="activity.name" type="text" class="form-control"  id="activity-name" placeholder={{activity.name}}>
   </div>
   <div class="form-group">
-    <label>Schedule</label>
-    <input [(ngModel)]="activity.schedule" type="text" class="form-control" placeholder={{activity.schedule}}>
+    <label for="activity-schedule">Schedule</label>
+    <input [(ngModel)]="activity.schedule" type="text" class="form-control" id="activity-schedule" placeholder={{activity.schedule}}>
   </div>
   <div class="form-group">
-    <label>Location</label>
-    <input [(ngModel)]="activity.location" type="text" class="form-control" placeholder={{activity.location}}>
+    <label for="activity-location">Location</label>
+    <input [(ngModel)]="activity.location" type="text" class="form-control" id="activity-location" placeholder={{activity.location}}>
   </div>
   <div class="form-group">
-    <label>Capacity</label>
-    <input [(ngModel)]="activity.capacity" type="text" class="form-control" placeholder={{activity.capacity}}>
+    <label for="activity-capacity">Capacity</label>
+    <input [(ngModel)]="activity.capacity" type="number" class="form-control" id="activity-capacity" placeholder={{activity.capacity}}>
   </div>
   <div class="form-group">
-    <label>Description</label>
-    <input [(ngModel)]="activity.description" type="text" class="form-control" placeholder={{activity.description}}>
+    <label for="activity-description">Description</label>
+    <input [(ngModel)]="activity.description" type="text" class="form-control" id="activity-description" placeholder={{activity.description}}>
   </div>
 
   <button class="btn btn-success btn-block" (click)="updateActivity(activity)">Update</button>

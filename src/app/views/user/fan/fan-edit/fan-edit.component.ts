@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../../../models/user.model.client';
 import {UserService} from '../../../../services/user.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-fan-edit',
@@ -13,7 +13,8 @@ export class FanEditComponent implements OnInit {
   user: User;
   constructor(
     private userService: UserService,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -30,6 +31,7 @@ export class FanEditComponent implements OnInit {
     this.userService.updateUser(newUser).subscribe(
       (user: User) => {
         this.user = user;
+        this.router.navigate(['..'], {relativeTo: this.activateRoute});
       }
     );
   }

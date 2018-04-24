@@ -51,6 +51,7 @@ export class OwnerDashboardComponent implements OnInit {
       this.userService.deleteUser(people._id).subscribe(
         (users: User[]) => {
           this.users = users;
+          this.ngOnInit();
         }
       );
     }

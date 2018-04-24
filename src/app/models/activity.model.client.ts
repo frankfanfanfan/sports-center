@@ -11,10 +11,10 @@ export class Activity {
 
   constructor(_id, name, schedule, location, description, capacity) {
     this._id = _id;
-    this.name = name;
-    this.schedule = schedule;
-    this.location = location;
-    this.description = description;
-    this.capacity = capacity;
+    this.name = name || null;
+    this.schedule = schedule || null;
+    this.location = location || null;
+    this.description = description || null;
+    this.capacity = capacity || 0;
   }
 }

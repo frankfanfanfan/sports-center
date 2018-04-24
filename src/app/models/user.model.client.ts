@@ -15,13 +15,13 @@ export class User {
 
   constructor(_id, username, password, role, email, phone, firstName, lastName, description) {
     this._id = _id;
-    this.username = username;
-    this.password = password;
-    this.role = role;
-    this.email = email;
-    this.phone = phone;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.description = description;
+    this.username = username || null;
+    this.password = password || null;
+    this.role = role || null;
+    this.email = email || null;
+    this.phone = phone || null;
+    this.firstName = firstName || null;
+    this.lastName = lastName || null;
+    this.description = description || null;
   }
 }
