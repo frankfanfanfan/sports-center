@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../../../models/user.model.client';
 import {UserService} from '../../../../services/user.service.client';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-player-new',
@@ -10,8 +11,8 @@ import {UserService} from '../../../../services/user.service.client';
 export class PlayerNewComponent implements OnInit {
 
   constructor(
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -19,7 +20,12 @@ export class PlayerNewComponent implements OnInit {
   register(username, password, passval, email, phone, firstName, lastName, decription) {
     if (password === passval) {
       const newUser = new User(undefined, username, password, 'player', email, phone, firstName, lastName, decription);
-      this.userService.createuser(newUser);
+      this.userService.createUser(newUser).subscribe(
+        (user: User) => {
+          console.log(user);
+          this.router.navigate(['/user', user._id]);
+        }
+      );
     } else {
       alert('Password not match');
     }

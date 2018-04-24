@@ -1,118 +1,94 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user.model.client';
 import {Activity} from '../models/activity.model.client';
+import {Http, Response} from '@angular/http';
+import 'rxjs/Rx';
+import {environment} from '../../environments/environment';
 
 
 @Injectable()
 export class UserService {
-  users: User[] = [
-    new User('1', 'o1', 'o1', 'owner', '', '', '', '', ''),
-    new User('2', 'f1', 'f1', 'fan', '', '', '', '', ''),
-    new User('3', 'p1', 'p1', 'player', '', '', '', '', ''),
-    new User('4', 'f2', 'f2', 'fan', '', '', '', '', '')
-  ];
 
-  createuser(user: User) {
-    this.users.push(
-      new User(
-        (new Date()).getTime() + '',
-        user.username,
-        user.password,
-        user.role,
-        user.email,
-        user.phone,
-        user.firstName,
-        user.lastName,
-        user.description)
-    );
+  constructor(private http: Http) {}
+
+  baseUrl = environment.baseUrl;
+
+  createUser(user: User) {
+    const url = this.baseUrl + '/api/user';
+    return this.http.post(url, user)
+      .map((response: Response) => {
+        return response.json();
+      });
   }
 
   findUserById(userId: String) {
-    return this.users.find(function(user) {
-      return user._id === userId;
-    });
+    return this.http.get(this.baseUrl + '/api/user/' + userId)
+      .map((response: Response) => {
+        return response.json();
+      });
   }
 
-  fincUserByCredential(username: String, password: String) {
-    return this.users.find(function(user) {
-      return user.username === username && user.password === password;
-    });
+  findAllUsers() {
+    const url = this.baseUrl + '/api/user';
+    return this.http.get(url).map(
+      (response: Response) => {
+        return response.json();
+      }
+    );
+  }
+
+
+  findUserByCredential(username: String, password: String) {
+    return this.http.get(this.baseUrl + '/api/user?username=' + username + '&password=' + password)
+      .map((response: Response) => {
+        return response.json();
+      });
   }
 
   updateUser(user: User) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]._id === user._id) {
-        this.users[i].firstName = user.firstName;
-        this.users[i].lastName = user.lastName;
-        return this.users[i];
-      }
-    }
-  }
-
-  findActivitiesByUser(userId: String) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]._id === userId) {
-        return this.users[i].activities;
-      }
-    }
-  }
-
-  findLikesByUser(userId: String) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]._id === userId) {
-        return this.users[i].likes;
-      }
-    }
+    const url =  this.baseUrl + '/api/user/' + user._id;
+    return this.http.put(url, user).map((response: Response) => {
+      return response.json();
+    });
   }
 
   deleteUser(userId: String) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]._id === userId) {
-        const j = +i;
-        this.users.splice(j, 1);
-      }
-    }
+    const url = this.baseUrl + '/api/user/' + userId;
+    return this.http.delete(url)
+      .map((response: Response) => {
+        return response.json();
+      });
   }
 
   enrollActivity(activity: Activity, userId: String) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]._id === userId && !this.users[i].activities.includes(activity)) {
-        this.users[i].activities.push(activity);
-      }
-    }
+    const url = this.baseUrl + '/api/user/' + userId + '/activity';
+    return this.http.put(url, activity)
+      .map((response: Response) => {
+        return response.json();
+      });
   }
 
   quitActivity(actId: String, userId: String) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]._id === userId) {
-        for (let j = 0; j < this.users[i].activities.length; j++) {
-          if (this.users[i].activities[j]._id === actId) {
-            const k = +j;
-            this.users[i].activities.splice(k, 1);
-          }
-        }
-      }
-    }
+    const url = this.baseUrl + '/api/user/' + userId + '/activity/' + actId;
+    return this.http.delete(url).map(
+      (response: Response) => {
+        return response.json();
+      });
   }
 
   likeActivity(activity: Activity, userId: String) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]._id === userId && !this.users[i].likes.includes(activity)) {
-        this.users[i].likes.push(activity);
-      }
-    }
+    const url = this.baseUrl + '/api/user/' + userId + '/like';
+    return this.http.put(url, activity)
+      .map((response: Response) => {
+        return response.json();
+      });
   }
 
   dislikeActivity(actId: String, userId: String) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]._id === userId) {
-        for (let j = 0; j < this.users[i].likes.length; j++) {
-          if (this.users[i].likes[j]._id === actId) {
-            const k = +j;
-            this.users[i].likes.splice(k, 1);
-          }
-        }
-      }
-    }
+    const url = this.baseUrl + '/api/user/' + userId + '/like/' + actId;
+    return this.http.delete(url).map(
+      (response: Response) => {
+        return response.json();
+      });
   }
 }

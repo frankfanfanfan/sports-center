@@ -25,21 +25,28 @@ export class ActivityDetailComponent implements OnInit {
 
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
-      this.user = this.userService.findUserById(params['uid']);
-      this.isPlayer = this.user.role === 'player';
-      this.isOwner = this.user.role === 'owner';
-      this.activity = this.activityService.findActivityById(params['actid']);
-      this.user.activities = this.user.activities == null ? [] : this.user.activities;
-      this.user.likes = this.user.likes == null ? [] : this.user.likes;
-      this.activity.players = this.activity.players == null ? [] : this.activity.players;
+      this.userService.findUserById(params['uid']).subscribe(
+        (user: User) => {
+          this.user = user;
+          this.isPlayer = this.user.role === 'player';
+          this.isOwner = this.user.role === 'owner';
+          this.user.activities = this.user.activities == null ? [] : this.user.activities;
+          this.user.likes = this.user.likes == null ? [] : this.user.likes;
+        }
+      );
+      this.activityService.findActivityById(params['actid']).subscribe(
+        (activity: Activity) => {
+          this.activity = activity;
+          this.activity.players = this.activity.players == null ? [] : this.activity.players;
+        }
+      );
     });
   }
 
   enroll() {
     if (this.user.role === 'player') {
-      this.userService.enrollActivity(this.activity, this.user._id);
-      this.activityService.registerPlayer(this.activity._id, this.user);
-      console.log(this.user.activities.length);
+      this.userService.enrollActivity(this.activity, this.user._id).subscribe();
+      this.activityService.registerPlayer(this.activity._id, this.user).subscribe();
       this.router.navigate(['../..'], {relativeTo: this.activateRoute});
     } else {
       alert('Only players can enroll this activity');
@@ -48,7 +55,7 @@ export class ActivityDetailComponent implements OnInit {
 
   like() {
     if (this.user.role === 'fan') {
-      this.userService.likeActivity(this.activity, this.user._id);
+      this.userService.likeActivity(this.activity, this.user._id).subscribe();
       this.router.navigate(['../..'], {relativeTo: this.activateRoute});
     } else {
       console.log('You are the owner, you decide');

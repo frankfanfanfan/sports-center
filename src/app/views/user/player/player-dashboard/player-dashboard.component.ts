@@ -3,6 +3,7 @@ import {User} from '../../../../models/user.model.client';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../../../services/user.service.client';
 import {ActivityService} from '../../../../services/activity.service.client';
+import {Activity} from '../../../../models/activity.model.client';
 
 @Component({
   selector: 'app-player-dashboard',
@@ -21,14 +22,22 @@ export class PlayerDashboardComponent implements OnInit {
   ngOnInit() {
     this.activateRoute.params.subscribe(
       (params: any) => {
-        this.user = this.userService.findUserById(params['uid']);
+        this.userService.findUserById(params['uid']).subscribe(
+          (user: User) => {
+            this.user = user;
+          }
+        );
       }
     );
   }
 
   removeActivity(userId: String, actId: String) {
-    this.activityService.removePlayer(actId, userId);
-    this.userService.quitActivity(actId, userId);
+    this.activityService.removePlayer(actId, userId).subscribe();
+    this.userService.quitActivity(actId, userId).subscribe(
+      (activities: Activity[]) => {
+        this.user.activities = activities;
+      }
+    );
   }
 
 }

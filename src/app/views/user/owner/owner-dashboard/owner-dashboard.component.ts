@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivityService} from '../../../../services/activity.service.client';
 import {User} from '../../../../models/user.model.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../../services/user.service.client';
 import {Activity} from '../../../../models/activity.model.client';
 
@@ -18,15 +18,28 @@ export class OwnerDashboardComponent implements OnInit {
   constructor(
     private userService: UserService,
     private activateRoute: ActivatedRoute,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.activateRoute.params.subscribe(
       (params: any) => {
-        this.user = this.userService.findUserById(params['uid']);
-        this.activities = this.activityService.activities;
-        this.users = this.userService.users;
+        this.userService.findUserById(params['uid']).subscribe(
+          (user: User) => {
+            this.user = user;
+          }
+        );
+        this.activityService.findAllActivities().subscribe(
+          (activities: Activity[]) => {
+            this.activities = activities;
+          }
+        );
+        this.userService.findAllUsers().subscribe(
+          (users: User[]) => {
+            this.users = users;
+          }
+        );
       }
     );
   }
@@ -35,7 +48,11 @@ export class OwnerDashboardComponent implements OnInit {
     if (people.role === 'owner') {
       alert('You can not delete your self...');
     } else {
-      this.userService.deleteUser(people._id);
+      this.userService.deleteUser(people._id).subscribe(
+        (users: User[]) => {
+          this.users = users;
+        }
+      );
     }
   }
 

@@ -18,11 +18,19 @@ export class FanEditComponent implements OnInit {
 
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
-      this.user = this.userService.findUserById(params['uid']);
+      this.userService.findUserById(params['uid']).subscribe(
+        (user: User) => {
+          this.user = user;
+        }
+      );
     });
   }
 
-  updateUser(user) {
-    this.user = this.userService.updateUser(user);
+  updateUser(newUser) {
+    this.userService.updateUser(newUser).subscribe(
+      (user: User) => {
+        this.user = user;
+      }
+    );
   }
 }

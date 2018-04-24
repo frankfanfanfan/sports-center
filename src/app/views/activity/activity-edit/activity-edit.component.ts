@@ -23,17 +23,29 @@ export class ActivityEditComponent implements OnInit {
 
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
-      this.user = this.userService.findUserById(params['uid']);
-      this.activity = this.activityService.findActivityById(params['actid']);
+      this.userService.findUserById(params['uid']).subscribe(
+        (user: User) => {
+          this.user = user;
+        }
+      );
+      this.activityService.findActivityById(params['actid']).subscribe(
+        (activity: Activity) => {
+          this.activity = activity;
+        }
+      );
     });
   }
 
-  updateActivity(activity) {
-    this.activityService.updateActivity(activity);
+  updateActivity(newActivity) {
+    this.activityService.updateActivity(newActivity).subscribe(
+      (activity: Activity) => {
+        this.activity = activity;
+      }
+    );
   }
 
   deleteActivity(actId) {
-    this.activityService.deleteActivity(actId);
+    this.activityService.deleteActivity(actId).subscribe();
     this.router.navigate(['../../..'], {relativeTo: this.activateRoute});
   }
 

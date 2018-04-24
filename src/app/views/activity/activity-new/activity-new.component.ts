@@ -16,19 +16,28 @@ export class ActivityNewComponent implements OnInit {
   constructor(
     private activityService: ActivityService,
     private userService: UserService,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
-      this.user = this.userService.findUserById(params['uid']);
+      this.userService.findUserById(params['uid']).subscribe(
+        (user: User) => {
+          this.user = user;
+        }
+      );
     });
   }
 
   createActivity(name, schedule, location, description, capacity) {
     if (this.user.role === 'owner') {
       const newActivity = new Activity(undefined, name, schedule, location, description, capacity);
-      this.activityService.createActivity(newActivity);
+      this.activityService.createActivity(newActivity).subscribe(
+        (activity: Activity) => {
+          this.router.navigate(['../..'], {relativeTo: this.activateRoute});
+        }
+      );
     } else {
       alert('You are not allowed to create activity.');
     }

@@ -3,6 +3,7 @@ import {User} from '../../../../models/user.model.client';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../../../services/user.service.client';
 import {ActivityService} from '../../../../services/activity.service.client';
+import {Activity} from '../../../../models/activity.model.client';
 
 @Component({
   selector: 'app-fan-dashboard',
@@ -15,19 +16,26 @@ export class FanDashboardComponent implements OnInit {
   constructor(
     private userService: UserService,
     private activateRoute: ActivatedRoute,
-    private activityService: ActivityService
   ) { }
 
   ngOnInit() {
     this.activateRoute.params.subscribe(
       (params: any) => {
-        this.user = this.userService.findUserById(params['uid']);
+        this.userService.findUserById(params['uid']).subscribe(
+          (user: User) => {
+            this.user = user;
+          }
+        );
       }
     );
   }
 
   dislikeActivity(userId: String, actId: String) {
-    this.userService.dislikeActivity(actId, userId);
+    this.userService.dislikeActivity(actId, userId).subscribe(
+      (likes: Activity[]) => {
+        this.user.likes = likes;
+      }
+    );
   }
 
 }
