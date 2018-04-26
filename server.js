@@ -27,9 +27,6 @@ app.set('port', port);
 // Create HTTP server
 const server = http.createServer(app);
 
-/*var dbServer = require('./test-mongodb/app');
-dbServer(app);*/
-
 //require('./test-mongodb/app')(app);
 require('./backend/app')(app);
 

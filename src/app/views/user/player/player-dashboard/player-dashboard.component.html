@@ -12,18 +12,36 @@
   </div>
 </nav>
 
-<h3>My Games</h3>
 <div class="container">
-  <ul class="list-group cl-list-group-borderless">
-    <li *ngFor = "let activity of user.activities" class="list-group-item cl-list-item-borderless">
-      <a routerLink="activity/{{activity._id}}">{{activity.name}}</a>
-      <a class="pull-right">
-        <span class="glyphicon glyphicon-remove" style="cursor: pointer" (click)="removeActivity(user._id, activity._id)"></span>
-      </a>
-    </li>
-  </ul>
-</div>
+  <h3>Favorite Activities</h3>
+  <table class="table table-hover table-striped">
+    <tr>
+      <th>Activity Name</th>
+      <th>Schedule</th>
+      <th>Location</th>
+      <th>description</th>
+      <th>participants</th>
+      <th></th>
+    </tr>
 
-<a routerLink="activity">See All the Activities</a>
+    <tr *ngFor="let activity of user.activities">
+      <td>
+        <a routerLink="activity/{{activity._id}}">{{activity.name}}</a>
+      </td>
+      <td>{{activity.schedule}}</td>
+      <td>{{activity.location}}</td>
+      <td>{{activity.description}}</td>
+      <td>
+        <div *ngIf="activity.players === undefined; then nobody else somebody"></div>
+        <ng-template #nobody>0/{{activity.capacity}}</ng-template>
+        <ng-template #somebody>{{activity.players.length}}/{{activity.capacity}}</ng-template>
+      </td>
+      <td>
+        <span class="glyphicon glyphicon-remove" style="cursor: pointer" (click)="removeActivity(user._id, activity._id)"></span>
+      </td>
+    </tr>
+  </table>
+  <button class="btn btn-primary" routerLink="activity">See All the Activities</button>
+</div>
 
 

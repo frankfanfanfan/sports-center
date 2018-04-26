@@ -116,3 +116,12 @@ a:hover{
   height: 100%;
 }
 
+.main-backgroud {
+
+  background-image: url("./assets/sports-center.jpg");
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  height: 100vh;
+}
+

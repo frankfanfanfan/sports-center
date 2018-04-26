@@ -1,18 +1,20 @@
-<div class="container">
-  <h1> Login </h1>
+<div class="main-backgroud">
+  <div class="container" style="padding-top: 100px">
+    <h1 style="text-align: center; color: white"> Sports Center </h1>
 
-  <form (ngSubmit) = "login()" #f="ngForm">
-    <input   placeholder="username" name="username" type="text" class="form-control" ngModel required #username="ngModel"/>
+    <form (ngSubmit) = "login()" #f="ngForm">
+      <input   placeholder="username" name="username" type="text" class="form-control" ngModel required #username="ngModel"/>
 
-    <input   placeholder="password" name="password" type="text" class="form-control" ngModel required #password="ngModel"/>
+      <input   placeholder="password" name="password" type="text" class="form-control" ngModel required #password="ngModel"/>
 
-    <span class="help-block" *ngIf="!username.valid && username.touched">
+      <span class="help-block" *ngIf="!username.valid && username.touched">
         Please enter username!
     </span>
 
-    <button class="btn btn-primary btn-block" type="submit" [disabled]="!f.valid">Login</button>
+      <button class="btn btn-primary btn-block" type="submit" [disabled]="!f.valid">Login</button>
 
-    <a class="btn btn-success btn-block" [routerLink]="['/register']">Register</a>
+      <a class="btn btn-success btn-block" [routerLink]="['/register']">Register</a>
 
-  </form>
+    </form>
+  </div>
 </div>

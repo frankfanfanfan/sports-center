@@ -1,10 +1,28 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left"></div>
+
+    <a routerLink="/login" class="navbar-brand cl-text-white cl-text-bold">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      Back to Login
+    </a>
+  </div>
+</nav>
+
 <div class="container-fluid cl-container-padding">
-  <ul class="list-group cl-list-group-borderless">
-    <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="fan">Register as fan</a>
-    </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="player">Register as player</a>
-    </li>
-  </ul>
+  <!--<ul class="list-group cl-list-group-borderless">-->
+    <!--<li class="list-group-item cl-list-item-borderless">-->
+      <!--<a routerLink="fan">Register as fan</a>-->
+    <!--</li>-->
+    <!--<li class="list-group-item cl-list-item-borderless">-->
+      <!--<a routerLink="player">Register as player</a>-->
+    <!--</li>-->
+  <!--</ul>-->
+  <div class="col-md-3">
+    <a class="btn btn-primary" routerLink="fan">Register as fan</a>
+  </div>
+  <div class="col-md-3">
+    <a class="btn btn-primary" routerLink="player">Register as player</a>
+  </div>
 </div>

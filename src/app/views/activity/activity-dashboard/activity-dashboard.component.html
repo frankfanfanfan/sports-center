@@ -3,8 +3,7 @@
 
     <div class="navbar-text pull-left">
       <a routerLink=".." class="cl-text-black cl-icon-padding">
-          <span class="glyphicon glyphicon-chevron-left">
-          </span>
+          <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </div>
     <div class="navbar-text pull-right">
@@ -20,15 +19,38 @@
 </nav>
 
 <div class="container">
-  <ul class="list-group cl-list-group-borderless">
-    <li *ngFor = "let activity of activities" class="list-group-item cl-list-item-borderless">
-      <a routerLink="{{activity._id}}">{{activity.name}}</a>
-      <div class="pull-right">
+  <!--<ul class="list-group cl-list-group-borderless">-->
+    <!--<li *ngFor = "let activity of activities" class="list-group-item cl-list-item-borderless">-->
+      <!--<a routerLink="{{activity._id}}">{{activity.name}}</a>-->
+      <!--<div class="pull-right">-->
+        <!--<div *ngIf="activity.players === undefined; then nobody else somebody"></div>-->
+        <!--<ng-template #nobody>0/{{activity.capacity}}</ng-template>-->
+        <!--<ng-template #somebody>{{activity.players.length}}/{{activity.capacity}}</ng-template>-->
+      <!--</div>-->
+    <!--</li>-->
+  <!--</ul>-->
+  <table class="table table-hover table-striped">
+    <tr>
+      <th>Activity Name</th>
+      <th>Schedule</th>
+      <th>Location</th>
+      <th>description</th>
+      <th>participants</th>
+    </tr>
+
+    <tr *ngFor="let activity of activities">
+      <td>
+        <a routerLink="{{activity._id}}">{{activity.name}}</a>
+      </td>
+      <td>{{activity.schedule}}</td>
+      <td>{{activity.location}}</td>
+      <td>{{activity.description}}</td>
+      <td>
         <div *ngIf="activity.players === undefined; then nobody else somebody"></div>
         <ng-template #nobody>0/{{activity.capacity}}</ng-template>
         <ng-template #somebody>{{activity.players.length}}/{{activity.capacity}}</ng-template>
-      </div>
-    </li>
-  </ul>
+      </td>
+    </tr>
+  </table>
 </div>
 
